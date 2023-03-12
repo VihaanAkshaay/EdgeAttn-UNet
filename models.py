@@ -6,7 +6,6 @@ from torch.nn import init
 
 import kornia as K
 
-import edge_algs
 
 # CONVOLUTION + RELU Block
 
@@ -169,6 +168,7 @@ class EdgeU1_Net(nn.Module):
         self.Up_conv2 = conv_block(ch_in=128, ch_out=64)
 
         self.Conv_1x1 = nn.Conv2d(64,output_ch,kernel_size=1,stride=1,padding=0)
+        self.finalSig = nn.Sigmoid()
 
 
     def forward(self,x):
@@ -210,6 +210,7 @@ class EdgeU1_Net(nn.Module):
 
         d1 = self.Conv_1x1(d2)
 
+
         return d1
 
 class AttU_Net(nn.Module):
@@ -244,6 +245,7 @@ class AttU_Net(nn.Module):
         self.Up_conv2 = conv_block(ch_in=128, ch_out=64)
 
         self.Conv_1x1 = nn.Conv2d(64,output_ch,kernel_size=1,stride=1,padding=0)
+        self.finalSig = nn.Sigmoid()
 
 
     def forward(self,x):
